@@ -8,6 +8,7 @@ const HomeHeader = () => {
         <Link href="/">Home</Link>
         <Link href="/top-pokemon">Top Pokemon</Link>
         <Link href={"/v1"}>V1</Link>
+        <Link href="/graph-ql">QraphQl V1beta</Link>
       </div>
     </div>
   );
