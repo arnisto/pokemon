@@ -1,4 +1,4 @@
-import NotFound from "@/app/not-found";
+import NotFound from "@/app/(with-header)/not-found";
 
 export default {
   title: "Pages/NotFound",

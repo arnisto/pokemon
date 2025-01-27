@@ -5,11 +5,11 @@ import { useState } from "react";
 
 const V1Home = () => {
   const [searchTerm, setSearchTerm] = useState(""); // Search term (name or ID)
-  const [pokemon, setPokemon] = useState<any>(null); // Pokémon data
+  const [pokemon, setPokemon] = useState(null); // Pokémon data
   const [error, setError] = useState(""); // Error message
 
   // Fetch Pokémon by name or ID
-  const fetchPokemon = async (term: any) => {
+  const fetchPokemon = async (term) => {
     try {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${term.toLowerCase()}`
@@ -17,6 +17,7 @@ const V1Home = () => {
       setPokemon(response.data);
       setError("");
     } catch (err) {
+      console.error(err);
       setPokemon(null);
       setError("Pokémon not found!");
     }

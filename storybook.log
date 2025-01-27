@@ -1,1 +1,10 @@
-^CTerminer le programme de commandes (O/N)ÿ? 
+npm ERR! code ECONNRESET
+npm ERR! errno ECONNRESET
+npm ERR! network Invalid response body while trying to fetch https://registry.npmjs.org/@storybook%2faddon-docs: aborted
+npm ERR! network This is a problem related to network connectivity.
+npm ERR! network In most cases you are behind a proxy or have bad network settings.
+npm ERR! network 
+npm ERR! network If you are behind a proxy, please make sure that the
+npm ERR! network 'proxy' config is set properly.  See: 'npm help config'
+
+npm ERR! A complete log of this run can be found in: C:\Users\21625\AppData\Local\npm-cache\_logs\2025-01-26T17_01_02_555Z-debug-0.log

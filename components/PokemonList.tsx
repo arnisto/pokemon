@@ -15,7 +15,7 @@ const PokemonList = () => {
   const [searchTerm, setSearchTerm] = useState(""); // Search term
   const [selectedType, setSelectedType] = useState(""); // Selected type filter
   const [types, setTypes] = useState([]); // List of all types
-  const [pokemonDetails, setPokemonDetails] = useState<any>({}); // Pokémon details
+  const [pokemonDetails, setPokemonDetails] = useState({}); // Pokémon details
   const [isLoading, setIsLoading] = useState(true); // Loading state
   const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode state
 
@@ -53,7 +53,7 @@ const PokemonList = () => {
         setTotalPages(Math.ceil(response.data.count / itemsPerPage));
 
         // Fetch details for each Pokémon
-        const details: any = {};
+        const details = {};
         for (const pokemon of response.data.results) {
           const detailResponse = await axios.get(pokemon.url);
           details[pokemon.name] = detailResponse.data;
@@ -84,13 +84,13 @@ const PokemonList = () => {
 
   // Filter Pokémon by search term and type
   const filteredPokemonList = pokemonList
-    .filter((pokemon: any) =>
+    .filter((pokemon) =>
       pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .filter((pokemon: any) =>
+    .filter((pokemon) =>
       selectedType
         ? pokemonDetails[pokemon.name]?.types.some(
-            (type: any) => type.type.name === selectedType
+            (type) => type.type.name === selectedType
           )
         : true
     );

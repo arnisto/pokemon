@@ -1,13 +1,45 @@
 "use client";
 
+// Types for the evolution chain data
+type Pokemon = {
+  name: string;
+  url: string;
+};
+
+type EvolutionChainProps = {
+  /** The URL to fetch the evolution chain data from */
+  evolutionChainUrl: string;
+  /** The background color for the evolution arrows */
+  backgroundColor: string;
+};
+
+type ChainLink = {
+  species: {
+    name: string;
+    url: string;
+  };
+  evolves_to: ChainLink[];
+};
+
 import { useEffect, useState } from "react";
 
+import Image from "next/image";
 import axios from "axios";
 
-const EvolutionChain = ({ evolutionChainUrl, backgroundColor }) => {
-  const [evolutionChain, setEvolutionChain] = useState([]);
+/**
+ * Component that displays a Pokémon's evolution chain
+ * @param {EvolutionChainProps} props - The component props
+ * @returns {JSX.Element} The rendered evolution chain
+ */
+const EvolutionChain = ({
+  evolutionChainUrl,
+  backgroundColor,
+}: EvolutionChainProps) => {
+  const [evolutionChain, setEvolutionChain] = useState<Pokemon[]>([]);
 
-  // Fetch evolution chain data
+  /**
+   * Fetches the evolution chain data from the API
+   */
   useEffect(() => {
     const fetchEvolutionChain = async () => {
       try {
@@ -22,10 +54,14 @@ const EvolutionChain = ({ evolutionChainUrl, backgroundColor }) => {
     fetchEvolutionChain();
   }, [evolutionChainUrl]);
 
-  // Helper function to parse the evolution chain
-  const parseEvolutionChain = (chain) => {
-    const evolutionChain = [];
-    let current = chain;
+  /**
+   * Parses the evolution chain data into a flat array
+   * @param {ChainLink} chain - The evolution chain data
+   * @returns {Pokemon[]} Array of Pokémon in the evolution chain
+   */
+  const parseEvolutionChain = (chain: ChainLink): Pokemon[] => {
+    const evolutionChain: Pokemon[] = [];
+    let current: ChainLink | null = chain;
 
     while (current) {
       evolutionChain.push({
@@ -49,11 +85,13 @@ const EvolutionChain = ({ evolutionChainUrl, backgroundColor }) => {
         <div key={pokemon.name} className="flex items-center">
           {/* Pokémon Image */}
           <div className="text-center">
-            <img
+            <Image
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.url
                 .split("/")
                 .slice(-2, -1)}.png`}
               alt={pokemon.name}
+              width={96}
+              height={96}
               className="w-24 h-24"
             />
             <p className="capitalize text-sm mt-2">{pokemon.name}</p>

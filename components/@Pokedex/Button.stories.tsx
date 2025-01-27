@@ -10,7 +10,5 @@ export const Primary = () => (
 );
 
 export const Secondary = () => (
-  <Button onClick={() => alert("Button clicked!")} className="bg-gray-500">
-    Secondary Button
-  </Button>
+  <Button onClick={() => alert("Button clicked!")}>Secondary Button</Button>
 );
